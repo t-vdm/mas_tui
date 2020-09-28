@@ -102,6 +102,25 @@ def health_check(health):
     else:
         health_style = f"[bold red]{health}[/bold red]"
     return health_style
+
+# helper to verify wear of the drive
+def wear_check(used):
+    if used == 'Property not found':
+        used = f"[bold red]N/A[/bold red]"
+    else:
+        used = str(f'{used}%')
+    return used
+
+# helper to verify wear of the drive
+def temp_check(temp):
+    if temp == 'Property not found':
+        temp = f"[bold red]N/A[/bold red]"
+    else:
+        temp = str(temp)
+        temp = temp[:-8]
+    return temp
+
+
 # helper to color fw in the table
 def firmware_check(fw_upd):
     if fw_upd == 'The selected drive contains current firmware as of this tool release.':
@@ -197,8 +216,6 @@ def generate_table_rows(table):
                 health = ssd_info[ssd]['DeviceStatus']
                 used = sensor_info['PercentageUsed']
                 temp = sensor_info['Temperature']
-                temp = str(temp)
-                temp = temp[:-8]
                 fw = ssd_info[ssd]['Firmware']
                 fw_upd = ssd_info[ssd]['FirmwareUpdateAvailable']
                 namespace = namespace_check(str(ssd_serial))
@@ -207,8 +224,8 @@ def generate_table_rows(table):
                     str(ssd_name),
                     str(ssd_serial),
                     health_check(health),
-                    str(f'{used}%'),
-                    temp,
+                    wear_check(used),
+                    temp_check(temp),
                     str(namespace),
                     fw,
                     firmware_check(fw_upd)
@@ -228,8 +245,6 @@ def generate_table_rows(table):
                 health = ssd_info[ssd]['DeviceStatus']
                 used = sensor_info[ssd]['PercentageUsed']
                 temp = sensor_info[ssd]['Temperature']
-                temp = str(temp)
-                temp = temp[:-8]
                 fw = ssd_info[ssd]['Firmware']
                 fw_upd = ssd_info[ssd]['FirmwareUpdateAvailable']
                 namespace = namespace_check(str(ssd_serial))
@@ -238,8 +253,8 @@ def generate_table_rows(table):
                     str(ssd_name),
                     str(ssd_serial),
                     health_check(health),
-                    str(f'{used}%'),
-                    temp,
+                    wear_check(used),
+                    temp_check(temp),
                     str(namespace),
                     fw,
                     firmware_check(fw_upd)
