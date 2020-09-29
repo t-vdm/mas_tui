@@ -181,7 +181,9 @@ def secure_erase(index):
         print(f'Secure erasing:: {index}...')
         secure_erase = subprocess.run(f'intelmas delete -f -output json -intelssd {index}', capture_output=True,shell=True)
         secure_erase_result = secure_erase.stdout
-        secure_erase_result  = json.loads(secure_erase_result.replace("/", ''))
+        secure_erase_result = secure_erase_result.decode()
+        secure_erase_result = secure_erase_result.replace("/", '?')
+        secure_erase_result = json.loads(secure_erase_result)
         for result in secure_erase_result:
             drive = result
             secure_erase_result = secure_erase_result[result]['Status']
