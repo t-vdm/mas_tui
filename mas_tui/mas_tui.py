@@ -54,12 +54,7 @@ def namespace_check(serial):
         namespace = len(namespace_info[next(iter(namespace_info))])
         namespace = namespace_info[list(namespace_info)[-1]]
         namespace = namespace.get('Namespace ID')
-        if namespace == 1:
-            namespace = f"[bold green]{namespace}[/bold green]"
-            return namespace
-        else:
-            namespace = f"[bold red]{namespace}[/bold red]"
-            return namespace
+        return namespace
 
     except:
         if bool(namespace_info[next(iter(namespace_info))]) == False:
@@ -73,6 +68,15 @@ def namespace_check(serial):
             return namespace
         else:
             pass
+def ns_color(namespace):
+    if namespace == 1:
+        namespace = f"[bold green]{namespace}[/bold green]"
+        return namespace
+    elif namespace == 'N/A'
+        return namespace
+    else:
+        namespace = f"[bold red]{namespace}[/bold red]"
+        return namespace
 # deletes all namespaces attached to a specific drive            
 def delete_namespaces(serial):
     ns_amount = namespace_check(serial)
@@ -229,7 +233,7 @@ def generate_table_rows(table):
                     health_check(health),
                     wear_check(used),
                     temp_check(temp),
-                    str(namespace),
+                    ns_color(namespace),
                     fw,
                     firmware_check(fw_upd)
                 )
@@ -258,7 +262,7 @@ def generate_table_rows(table):
                     health_check(health),
                     wear_check(used),
                     temp_check(temp),
-                    str(namespace),
+                    ns_color(namespace),
                     fw,
                     firmware_check(fw_upd)
                 )
