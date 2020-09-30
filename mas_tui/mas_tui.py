@@ -72,7 +72,7 @@ def ns_color(namespace):
     if namespace == 1:
         namespace = f"[bold green]{namespace}[/bold green]"
         return namespace
-    elif namespace == 'N/A'
+    elif namespace == 'N/A':
         return namespace
     else:
         namespace = f"[bold red]{namespace}[/bold red]"
@@ -345,39 +345,39 @@ generate_table_rows(table)
 console.print(table)
 while True:
     answers = prompt(questions)
-    if answers['action'] == '1.FW UPDATE AND SECURE ERASE':
+    if answers['action'] == questions[0]['choices'][0]:
         drive_select = Prompt.ask("Select drive to update + wipe", choices=index_list,default='all')
         if drive_select == 'back':
             refresh()
         else:
             secure_erase(drive_select)
             firmware_update(drive_select)
-    elif answers['action'] == '2.SECURE ERASE ONLY':
+    elif answers['action'] == questions[0]['choices'][1]:
         drive_select = Prompt.ask("Select drive to wipe", choices=index_list,default='all')
         if drive_select == 'back':
             refresh()
         else:
             secure_erase(drive_select)
-    elif answers['action'] == '3.FW UPDATE ONLY':
+    elif answers['action'] == questions[0]['choices'][2]:
         drive_select = Prompt.ask("Select drive to update", choices=index_list,default='all')#
         if drive_select == 'back':
             refresh()
         else:
             firmware_update(drive_select)
-    elif answers['action'] == '4.DELETE NAMESPACES':
+    elif answers['action'] == questions[0]['choices'][3]:
         drive_select = Prompt.ask("Select drive to delete namespaces", choices=index_list_alt,default='back')
         if drive_select == 'back':
             refresh()
         else:
             delete_namespaces(drive_select)
-    elif answers['action'] == '5.RESTORE NAMESPACES':
+    elif answers['action'] == questions[0]['choices'][4]:
         drive_select = Prompt.ask("Select drive to reset namespaces", choices=index_list_alt,default='back')
         if drive_select == 'back':
             refresh()
         else:
             delete_namespaces(drive_select)
             reset_namespaces(drive_select)
-    elif answers['action'] == '9.REFRESH DRIVE INFO':
+    elif answers['action'] == questions[0]['choices'][5]:
         index_list.clear()
         index_list.append('all')
         index_list.append('back')
@@ -396,7 +396,7 @@ while True:
         generate_table_rows(table)
         os.system('cls' if os.name == 'nt' else 'clear') 
         console.print(table)
-    elif answers['action'] == '0.EXIT':
+    elif answers['action'] == questions[0]['choices'][6]:
         print(f'EXITING PROGRAM..')
         break
     else:
