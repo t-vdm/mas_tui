@@ -54,7 +54,12 @@ def namespace_check(serial):
         namespace = len(namespace_info[next(iter(namespace_info))])
         namespace = namespace_info[list(namespace_info)[-1]]
         namespace = namespace.get('Namespace ID')
-        return namespace
+        if namespace == 1:
+            namespace = f"[bold green]{namespace}[/bold green]"
+            return namespace
+        else:
+            namespace = f"[bold red]{namespace}[/bold red]"
+            return namespace
 
     except:
         if bool(namespace_info[next(iter(namespace_info))]) == False:
