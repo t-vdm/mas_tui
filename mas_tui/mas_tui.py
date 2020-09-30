@@ -32,7 +32,7 @@ def get_ssd_info():
     ssdinfo = subprocess.run('intelmas show -output json -intelssd', capture_output=True,shell=True)
     print('Requesting SSD INFO...[DONE]')
     return ssdinfo
-# gets sensor health info from Intel MAs
+# gets sensor health info from Intel MAS
 def get_sensor_info():    
     print('Requesting SENSOR INFO...')
     sensorinfo = subprocess.run('intelmas show -output json -sensor -intelssd', capture_output=True,shell=True)
@@ -102,7 +102,6 @@ def health_check(health):
     else:
         health_style = f"[bold red]{health}[/bold red]"
     return health_style
-
 # helper to verify wear of the drive
 def wear_check(used):
     if used == 'Property not found':
@@ -110,7 +109,6 @@ def wear_check(used):
     else:
         used = str(f'{used}%')
     return used
-
 # helper to verify wear of the drive
 def temp_check(temp):
     if temp == 'Property not found':
@@ -119,8 +117,6 @@ def temp_check(temp):
         temp = str(temp)
         temp = temp[:-8]
     return temp
-
-
 # helper to color fw in the table
 def firmware_check(fw_upd):
     if fw_upd == 'The selected drive contains current firmware as of this tool release.':
